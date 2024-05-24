@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block selfCss %}
+   <link href="{{asset('css/home/style.css')}}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block contentPage %}
+
+ <div class="wrap-pub">
+ <small>texte publicitaire et annonce ici</small>
+ </div>
+ <div class="wrap-panier float-end">
+    <a href="{{path("app_panier")}}">
+    <i class="fa fa-shopping-basket float-end" aria-hidden="true" style="color:#ec7e31;padding:10px;"></i>  
+    </a> 
+ </div>
+
+<div class="wrapper">
+    <h1>Découvrez des produits alimentaires<br>africains de qualité, importés et distribués<br>pour vous satisfaire.</h1>
+
+    <div class="wrap-filter form-inline">
+         {{ form_start(form) }}
+         {# <div class="form-group"> #}
+            {{ form_widget(form.libelle) }}
+        {{ form_widget(form.save) }}
+        {# </div> #}
+            {{ form_end(form) }} 
+    </div>
+</div>
+ <div id="espaceur"></div>
+ {# DEBUT CONTAINER PRODUCT LIST #}
+    <div class="container product-list">
+        <div class="row">
+          {% if produits|length > 0 %}
+                {% for produit in produits %}
+                
+                    <div class="col-12 col-md-4 mb-2">
+                        <div class="d-flex flex-column ">
+                         <img src="{{ asset('uploads/produits/' ~ produit.image) }}" class="card-img-top" id="image-product" alt="{{ produit.libelle }}">
+                                <small class="text-decoration-none product-libelle">{{ produit.libelle }}</small>
+                                <p class="product-price">{{ produit.prixDeVente ~ ' CFA' }}</p>
+
+                        </div>
+                                 <a href="{{path("app_produit_show", {'id': produit.id} )}}">
+                                 <button type="button" class="btn btn-light"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                 </a> 
+                                 <a href="{{path("app_add_panier_home", {'id': produit.id} )}}">
+                                    <button type="button" class="btn btn" style="background-color:black;"> 
+                                     <i class="fa fa-shopping-basket" aria-hidden="true" style="color:white;padding:10px;"></i>
+                                 </button>
+                                 </a> 
+                    </div> 
+                {% endfor %}
+            {% else %}
+                <p>Aucun Enregistrement trouvé.</p>
+            {% endif %}
+        </div>
+
+
+
+
+    </div>
+    {# FIN CONTAINER PRODUCT LIST #}
+     <div id="espaceur"></div>
+
+
+     <div class="wrap-about-us">
+     
+        <p><span class="t-gras">Fondée en 2024,</span> IKA SUGU est une entreprise spécialisée dans l'importation<br> et la vente en ligne de produits alimentaires africains de qualité.</p>
+        
+        
+        <p class="mt-5">Animés par la passion des saveurs authentiques d'Afrique, les <br>fondateurs ont fait le pari de vous<br> 
+faire découvrir les meilleurs ingrédients de la région, directement<br>chez vous.</p>
+
+    <a href="{{path('app_about')}}">En savoir plus sur IKA SUGU »</a>
+     </div>
+
+{% include "/shared/footer.html.twig" %}
+{% endblock %}
+
+{% block selfJs %}
+  <script>
+    </script>
+{% endblock %}

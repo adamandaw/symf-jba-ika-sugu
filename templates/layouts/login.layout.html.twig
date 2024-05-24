@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{% block titlePage %}{% endblock %} </title>
+        {% block stylesheet %}
+            <!-- Bootstrap core CSS -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <link href="{{asset('css/security/login.css')}}" rel="stylesheet" />
+            <link rel="icon" href="{{asset('images/ikasugu-logo.png')}}" type="image/png">
+        {% endblock %}
+
+        {% block selfCss %}{% endblock %}
+
+    </head>
+    <body id="body">
+
+        {# <div class=" container"> #}
+            
+          
+          {#  #}
+          <div class="container">
+            <div class="row ">
+                <div class="col-md-4">
+           
+                {% block sectionLeft %}{% endblock %}
+                </div>
+
+                <div class="col-md-8 d-none d-md-block section-fond">
+                {% block sectionRight %} 
+                        <!-- Zone d'image et de texte -->
+                        {# <img src="{{asset('images/fille-souriante.jpg')}}" alt="Image" class="img-fluid"> #}
+                        {# <h1 class="h3 mb-3">dd</h1> #}
+                    
+                    {% endblock %}
+                </div> 
+            </div>
+            </div>
+          {#  #}
+            {# <div class="content-wrapper w-lg-25 w-md-75 w-100 d-flex justify-content-center flex-column">
+                
+                <div class="section-left card  position-relative" style="top:10vh;margin:auto;">
+                    {% block sectionLeft %}{% endblock %}
+                </div>
+            
+            </div> #}
+        {# </div> #}
+
+
+    </body>
+    {% block cdn %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    {% endblock %}
+        
+    
+
+    {% block selfJs %}{% endblock %}
+</html>

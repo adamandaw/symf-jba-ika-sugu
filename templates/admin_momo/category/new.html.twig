@@ -1,0 +1,12 @@
+{% extends '/layouts/form.create.html.twig' %}
+
+{% block title %}New Category{% endblock %}
+        {% block selfCss %}{% endblock %}
+
+{% block theContentForm %}
+    <h1>Enregist Category</h1>
+
+    {{ include('admin_momo/category/_form.html.twig') }}
+
+    <a href="{{ path('app_category_index') }}">back to list</a>
+{% endblock %}

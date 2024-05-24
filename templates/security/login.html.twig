@@ -1,0 +1,112 @@
+{% extends '/layouts/login.layout.html.twig' %}
+
+{% block titlePage %}Connectez vous !{% endblock %}
+{% block selfCss %}
+       <link href="{{asset('css/auth/login.css')}}" rel="stylesheet" />
+
+{% endblock %}
+
+
+{% block sectionLeft %}
+<div class="logo my-4">
+    <a class="navbar-brand" href="{{path("app_home")}}">
+        <img src="{{asset('images/ikasugu-logo.png')}}" alt="logo_image" id="logo_image"> 
+    </a>
+</div>
+
+<div class="formulaire">
+ <div class="container mt-3 content-f">
+      <h2>Connexion </h2>
+      <form method="post">
+        {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+        <div class="mb-3 mt-3">
+           <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+            class="form-control" 
+            placeholder="Email"
+            autocomplete="email"
+            required autofocus>
+        </div>
+        <div class="mb-3">
+             <input type="password" name="password" id="inputPassword" class="form-control"
+            autocomplete="current-password"
+            placeholder="Mot de passe"
+            required>
+        </div>
+        <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+            {% if error %}
+                <small class="text-center" style="color:red;">{{ error.messageKey|trans(error.messageData, 'security') }}</small>
+                {# <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
+            {% endif %}
+           
+            <button class="btn btn-submit focus-in-expand-fwd" type="submit">
+                Confirmer
+            </button>
+        {# <button type="submit" class="btn btn-submit focus-in-expand-fwd">Confirmer</button> #}
+      </form>
+    </div>
+                    {# <label for="inputEmail">Email</label> #}
+            
+           
+            {#   #}
+            {# <label for="inputPassword">Password</label> #}
+         
+
+        
+</div>
+                
+
+{% endblock %}
+
+ {% block sectionRight %}
+ <div class="wrapper">
+  <h4 class="focus-in-contract-bck">Acceder à votre espace sécurisé</h4>
+
+  <img
+    src="#"
+    class="img-fluid rounded-top"
+    alt="imjj"
+  />
+</div>
+  
+                {% endblock %} 
+
+
+
+
+
+{% block cdn %}
+{{parent()}}
+
+{% endblock %}
+
+{# <form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form> #}

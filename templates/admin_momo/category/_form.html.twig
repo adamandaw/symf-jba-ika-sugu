@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    
+    {# <button class="btn">{{ button_label|default('Save') }}</button> #}
+<div class="form-inline">
+    <div class="form-group">
+        {{ form_widget(form.libelle) }}
+        {{ form_widget(form.save) }}
+        {# <small id="helpId" class="text-muted">Help text</small> #}
+    </div>
+</div>
+{{ form_end(form) }}

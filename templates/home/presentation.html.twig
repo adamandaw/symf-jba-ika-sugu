@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui Sommes Nous ?{% endblock %}
+
+{% block selfCss %}
+   <link href="{{asset('css/home/style.css')}}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block contentPage %}
+{# {% include "/shared/nav.html.twig" %} #}
+ <nav class="navbar navbar-expand-lg navbar ">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="{{asset("images/ikasugu-logo.png")}}" alt="logo" id="logo-ikasugu">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCta" aria-controls="navbarCta" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCta">
+      <ul class="navbar-nav justify-content-center flex-grow-1">
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_home')}}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_about')}}">La Boutique</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item loginBtn">
+          <a class="" id="" href="{{path('app_panier')}}"><i class="fa fa-shopping-basket" aria-hidden="true" style="color:white;padding:10px;"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    {# <h1>Présentation</h1> #}
+  <section class="bg-fond py-5">
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-md-8 text-white">
+                <h1>Chez IKA SUGU,</h1>
+                <p>
+                    Nous sommes une entreprise basée au Sénégal spécialisée dans l'importation et la vente de produits alimentaires de qualité en provenance de la sous-région africaine.
+                </p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<div class="container">
+
+    {# start more info 3  #}
+    <div class="more-info about-info mt-4">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="more-info-content">
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                    <div class="right-content">
+                        <span>Partager les saveurs authentiques du continent africain</span>
+                        <h2>Notre <em>mission</em></h2>
+                        <p>
+                            Nous avons comme but de recréer l'ambiance des marchés africains dans votre cuisine, en vous proposant une sélection exclusive de produits alimentaires haut de gamme. 
+                        </p>
+                        {# <a href="" class="filled-button">Read More</a> #}
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="left-image">
+                        <img src="{{asset("images/about-image.jpg")}}" alt="image">
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        {# end more info 3 #}
+    <div class="mt-2 more-info about-info">
+    <!-- Start Section -->
+    <section class="container py-5">
+        <div class="row text-center pt-5 pb-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Nos Services</h1>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
+                    <h2 class="h5 mt-4 text-center">Livraison à domicile</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                    </div>
+                    <h2 class="h5 mt-4 text-center">Vente de produits alimentaires africains de qualité</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center">
+                    <i class="fa fa-external-link-square" aria-hidden="true"></i>
+                    </div>
+                    <h2 class="h5 mt-4 text-center">Commande personnalisée</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center">
+                    <i class="fa fa-ticket" aria-hidden="true"></i>
+
+                    </div>
+                    <h2 class="h5 mt-4 text-center">Abonnement à des paniers de produits alimentaires</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Section -->
+
+    </div>
+</div>
+{% include "/shared/footer.html.twig" %}
+{% endblock %}
+
+{% block selfJs %}{% endblock %}

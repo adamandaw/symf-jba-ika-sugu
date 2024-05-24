@@ -1,0 +1,27 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+       thumbnail_produit_image:
+            uri_prefix: /uploads/produits
+            upload_destination: '%kernel.project_dir%/public/uploads/produits'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+       
+       thumbnail_produit_premier_image:
+            uri_prefix: /uploads/produits/premiereImage
+            upload_destination: '%kernel.project_dir%/public/uploads/produits/premiereImage'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+       
+       thumbnail_produit_seconde_image:
+            uri_prefix: /uploads/produits/secondeImage
+            upload_destination: '%kernel.project_dir%/public/uploads/produits/secondeImage'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+       
+       thumbnail_produit_derniere_image:
+            uri_prefix: /uploads/produits/derniereImage
+            upload_destination: '%kernel.project_dir%/public/uploads/produits/derniereImage'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+           

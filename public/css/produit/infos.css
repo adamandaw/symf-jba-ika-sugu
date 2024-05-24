@@ -1,0 +1,47 @@
+/* .info-prod h1{
+text-align: center;
+} */
+.info-prod{
+padding: 10px;
+}
+.zone-image{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+/* background-color: red; */
+}
+#image{
+    height: 60vh;
+    width: 80%;
+}
+.price-gras{
+    color: #ec7e31;
+    font-weight: bold;
+}
+.provenance-gras{
+    font-weight: bold;
+
+}
+.price-gras p{
+    font-size: 12px;
+}
+.btn-panier{
+    background-color:black;
+    color: white;
+    font-weight: bold;
+}
+.zone-other-image{
+    /* background-color: red; */
+    margin-top: 15px;
+    justify-content: start;
+}
+#image-other{
+    height: 20vh;
+    width: 40%;
+}
+
+
+.recommandation{
+    margin-top: 80px;
+}

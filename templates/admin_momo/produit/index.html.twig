@@ -1,0 +1,40 @@
+{% extends '/layouts/template.html.twig' %}
+{% block title %}Category List{% endblock %}
+{% block   setting %}{% endblock %}
+{% block   selfCss  %}
+        <link href="{{asset('css/common/btnstyle.css')}}" rel="stylesheet" />
+        <link href="{{asset('css/common/table.css')}}" rel="stylesheet" />
+
+{% endblock %}
+{% block theContentPage %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<div class="example-wrapper">
+    <h1>Listes des Produits</h1>
+        <div class="wrapper-bouton-new d-flex justify-content-end">
+
+        <a href="{{ path('app_admin_produit_new') }}" class="my-btn">Nouveau</a>
+        </div>
+ 
+<div class="row">
+{% for produit in produits %}
+    <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        {# <a href="shop-single.html"> #}
+                            <img src="{{asset("/uploads/produits/"~ produit.image )}}" class="card-img-top" alt="image_null">
+                        {# </a> #}
+                        <div class="card-body">
+                         
+                            <h3 class=" text-decoration-none text-dark">{{ produit.libelle }}</h3>
+                            <p class="text-dark">{{ produit.quantite }}</p>
+                            {# <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a> #}
+                            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                        </div>
+                    </div>
+                </div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}
