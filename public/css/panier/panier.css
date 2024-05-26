@@ -1,0 +1,33 @@
+#select-produit,#panier_add_quantite_quantite{
+    margin-right: 50px;
+    width: 200px;
+}
+select  option{
+    /* text-align: center; */
+    font-weight: bold;
+    color:black
+}
+#panier_add_quantite_save{
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+.content-list{
+    margin: 40px;
+}
+.mon-panier-list,.panier-commande{
+border: 6px solid none ;
+padding: 10px;
+border-radius: 10px;
+background-color: rgb(241, 241, 241);
+box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.22);
+-webkit-box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.22);
+-moz-box-shadow: 10px 10px 8px -7px rgba(0,0,0,0.22);
+}
+
+thead tr th{
+text-align: center;
+}
+tbody tr td{
+text-align: center;
+}

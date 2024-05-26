@@ -14,7 +14,14 @@
  </div>
  <div class="wrap-panier float-end">
     <a href="{{path("app_panier")}}">
-    <i class="fa fa-shopping-basket float-end" aria-hidden="true" style="color:#ec7e31;padding:10px;"></i>  
+    <i class="fa fa-shopping-basket float-end" aria-hidden="true" style="color:#ec7e31;padding:10px;"></i>
+     {% if app.session.has('panier') %}
+        {% set panier = app.session.has('panier') %}
+        {% if  panier|length > 0 %}
+            <span class="badge bg-light rounded-pill" style="color:black; position: relative; top: -10px; right: 5px;">{{ app.session.get('panier')|length}}</span>
+        {% endif %}
+        
+    {% endif %}
     </a> 
  </div>
 

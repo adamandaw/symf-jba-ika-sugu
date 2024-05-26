@@ -33,6 +33,18 @@
     </div>
   </div>
 </nav>
+
+{% if app.session.has('image_name') and app.session.has('affiche_image')  %}
+{% set imageName = app.session.get('image_name') %}
+                
+ <section class="d-none d-md-block">
+ <div class="bg-image-container">
+        <img src="{{ asset('/images/' ~ imageName) }}" id="bg-image-name" alt="image_null">
+        <div class="bg-overlay"></div>
+    </div>
+</section>
+{% endif %}
+
 <div class="container mt-4">
 
    {#  #}

@@ -59,15 +59,20 @@ class AdminMomoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $produit->setQuantite(100);
             $produit->setImage($form->get('thumbnailFile')->getData()->getClientOriginalName());
-            $produit->setPremiereImage($form->get('thumbnailPremiereImage')->getData()->getClientOriginalName());
-            $produit->setSecondeImage($form->get('thumbnailSecondeImage')->getData()->getClientOriginalName());
-            $produit->setDerniereImage($form->get('thumbnailDerniereImage')->getData()->getClientOriginalName());
+            if ( $produit->getPremiereImage() !== null ||  $produit->getSecondeImage() !== null ||  $produit->getDerniereImage() !== null) {
+                # code...
+                $produit->setPremiereImage($form->get('thumbnailPremiereImage')->getData()->getClientOriginalName());
+                $produit->setSecondeImage($form->get('thumbnailSecondeImage')->getData()->getClientOriginalName());
+                $produit->setDerniereImage($form->get('thumbnailDerniereImage')->getData()->getClientOriginalName());
+            }
             // VICH
             $produit->setThumbnailFile($form->get('thumbnailFile')->getData());
             $produit->setThumbnailPremiereImage($form->get('thumbnailPremiereImage')->getData());
             $produit->setThumbnailSecondeImage($form->get('thumbnailSecondeImage')->getData());
             $produit->setThumbnailDerniereImage($form->get('thumbnailDerniereImage')->getData());
+           
             // dd($produit);
             $entityManager->persist($produit);
             $entityManager->flush();

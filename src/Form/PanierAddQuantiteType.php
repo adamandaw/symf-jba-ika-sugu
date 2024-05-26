@@ -19,13 +19,12 @@ class PanierAddQuantiteType extends AbstractType
                 "attr"=>[
                     "placeholder"=>"Saisir quantité"
                 ] ,
-                'scale' => 2, // nombre de décimales
                 'html5' => true, // affichage des séparateurs de milliers
             ])
             ->add('save',SubmitType::class,[
                 "label"=>"Ajouter",
                 "attr"=>[
-                    "class"=>"btn-primary  btn-sm float-right",
+                    "class"=>"btn  btn-sm float-right",
                 ]
             ])
         ;

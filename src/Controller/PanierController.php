@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
+use App\Form\CommandeType;
 use App\Form\PanierAddQuantiteType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProduitRepository;
@@ -13,10 +15,17 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class PanierController extends AbstractController
 {
-    #[Route('/mon-panier/list', name: 'app_panier')]
+    #[Route('/mon-panier/list', name: 'app_panier', methods: ['GET', 'POST'])]
     public function index(Request $request,CategoryRepository $categoryRepository,SessionInterface $session,ProduitRepository $produitRepository): Response
     {
         $panier = $session->get('panier');
+
+        if ($session->has('panier')) {
+            
+            $commande = new Commande();
+            $form = $this->createForm(CommandeType::class, $commande);
+            $form->handleRequest($request);
+        }
         // $session->remove('panier');
         $maListe=[];
         if ($panier !== null ) {
@@ -27,26 +36,46 @@ class PanierController extends AbstractController
                 }
             }
         }
-        $form = $this->createForm(PanierAddQuantiteType::class);
-        $form->handleRequest($request);
 
-        $cart=[];
-        if ($form->isSubmitted() && $form->isValid()) {
+        // dd($panier);        
+        $montant=0;
+        if ($request->isMethod("POST") ) {
             extract($_POST);
-            $quantite=$form->get("quantite")->getData();
-            // dd(intval($quantite) );
+            // dd($_POST);        
             // faire des comparaison sur la qte disponible etc 
+            $leProduit= $produitRepository->findOneBy(['id' => intval($productId)]);
+            if ($leProduit !== null) {
+                $tableau[] = $leProduit->getId();
+        
+                // Récupérer la quantité du produit dans la session
+                $quantiteCommande = $session->get('qte_' . $leProduit->getId(), 0);
+                
+                // Mettre à jour la quantité dans la session
+                $quantiteCommande += intval($quantite);
+                $session->set('qte_' . $leProduit->getId(), $quantiteCommande);
+                
+                 // Récupérer le montant total actuel depuis la session
+                $montantTotal = $session->get('commande_montant', 0);
 
-            $leProduit= $produitRepository->findOneBy(['id' => $produit]);
-            $cart[]=$leProduit;
-            // return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+                // Calculer le nouveau montant
+                $nouveauMontant = $leProduit->getPrixDeVente() * intval($quantite);
+                // Mettre à jour le montant total
+                $montantTotal += $nouveauMontant;
+                $session->set('commande_montant', $montantTotal);
+                // Mettre à jour le montant de la requête
+                $montant = $montantTotal;
+                $session->set('montant', $montant);
+
+               
+            }
         }
         
         return $this->render('panier/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
             'maListe' => $maListe,
-            'form' => $form,
-            'cart' => $cart,
+            'montant' => $montant,
+            'formAction' => $_ENV['APP_URL'],
+            'formCommande' => $form,
         ]);
     }
    

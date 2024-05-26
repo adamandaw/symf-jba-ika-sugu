@@ -59,7 +59,7 @@
                 </div> 
             </div> 
     </div>
-    <div class="row zone-other-image">
+    {# <div class="row zone-other-image">
             <div class="col-md-2">
                             <img src="{{ asset('uploads/produits/premiereImage/' ~ produit.premiereImage) }}" alt="{{ produit.libelle }}" id="image-other">
 
@@ -70,9 +70,11 @@
             <div class="col-md-2">
                 <img src="{{ asset('uploads/produits/derniereImage/' ~ produit.derniereImage) }}" alt="{{ produit.libelle }}" id="image-other">
             </div>
-    </div>
+    </div> #}
            
-           
+            <div class="my-5">
+            </div>
+{#            
           {% if recommandations|length > 0 %}
      <div class="recommandation">
         <h1>Recommandations pour vous</h1>
@@ -94,7 +96,7 @@
             
         </div>
     </div>
-            {% endif %}
+            {% endif %} #}
 
 </div>
 {% include "/shared/footer.html.twig" %}

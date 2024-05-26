@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/category')]
@@ -44,10 +45,20 @@ class CategoryController extends AbstractController
     }
    
     #[Route('/{id}', name: 'app_category_list_produit', methods: ['GET', 'POST'])]
-    public function produitByCategoryBy($id,Request $request,CategoryRepository $categoryRepository,ProduitRepository $produitRepository): Response
+    public function produitByCategoryBy($id,Request $request,CategoryRepository $categoryRepository,ProduitRepository $produitRepository,SessionInterface $session): Response
     {
-        $produits = $produitRepository->findBy(['id' => $id]);
-    //    dd($produits[0]->getCategory()->getLibelle());
+        $context=false;
+        // dd($context);
+        if ($session->has("image_name") ) {
+            $session->set('affiche_image',true);
+        }else {
+            $session->remove('image_name');
+        }
+        
+        $cat=$categoryRepository->findOneBy(['id' => $id]);
+        $produits = $produitRepository->findBy(['category' => $cat]);
+       
+    //    dd($produits);
         return $this->render('home/listes.produit.html.twig', [
             'produitsByCategory' => $produits,
             'categories' => $categoryRepository->findAll(),
