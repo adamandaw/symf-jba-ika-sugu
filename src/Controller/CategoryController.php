@@ -47,14 +47,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_category_list_produit', methods: ['GET', 'POST'])]
     public function produitByCategoryBy($id,Request $request,CategoryRepository $categoryRepository,ProduitRepository $produitRepository,SessionInterface $session): Response
     {
-        $context=false;
-        // dd($context);
-        if ($session->has("image_name") ) {
-            $session->set('affiche_image',true);
-        }else {
-            $session->remove('image_name');
-        }
-        
+
         $cat=$categoryRepository->findOneBy(['id' => $id]);
         $produits = $produitRepository->findBy(['category' => $cat]);
        

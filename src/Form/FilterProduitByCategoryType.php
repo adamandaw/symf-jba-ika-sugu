@@ -33,7 +33,7 @@ class FilterProduitByCategoryType extends AbstractType
         ->add('save',SubmitType::class,[
             "label"=>"Rechercher",
             "attr"=>[
-                "class"=>"btn-dark  btn-sm",
+                "class"=>"btn-dark main-button  btn-sm",
             ]
         ])
         ;

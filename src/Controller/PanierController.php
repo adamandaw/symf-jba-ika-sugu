@@ -20,12 +20,17 @@ class PanierController extends AbstractController
     {
         $panier = $session->get('panier');
 
-        if ($session->has('panier')) {
-            
+ 
             $commande = new Commande();
             $form = $this->createForm(CommandeType::class, $commande);
             $form->handleRequest($request);
-        }
+            if ($form->isSubmitted() && $form->isValid()) {
+                // dd("ss");
+                $session->set('telephone',$form->get("telephone")->getData());
+                return $this->redirectToRoute('app_commande_new', [], Response::HTTP_SEE_OTHER);
+            } 
+    
+        
         // $session->remove('panier');
         $maListe=[];
         if ($panier !== null ) {
@@ -38,38 +43,47 @@ class PanierController extends AbstractController
         }
 
         // dd($panier);        
-        $montant=0;
-        if ($request->isMethod("POST") ) {
+        $montant = 0;
+        $tableauDeCommande=["id"=>null,"quantiteCommander"=> null];
+        if ($request->isMethod("POST")) {
+            // dd($_POST);
             extract($_POST);
-            // dd($_POST);        
-            // faire des comparaison sur la qte disponible etc 
-            $leProduit= $produitRepository->findOneBy(['id' => intval($productId)]);
+            $leProduit = $produitRepository->findOneBy(['id' => intval($productId)]);
             if ($leProduit !== null) {
-                $tableau[] = $leProduit->getId();
-        
-                // Récupérer la quantité du produit dans la session
-                $quantiteCommande = $session->get('qte_' . $leProduit->getId(), 0);
+                $tableauDeCommande['id']=$leProduit->getId();
+                $tableauDeCommande['quantiteCommander']=intval($quantite);
+
+                if (array_key_exists($tableauDeCommande['id'],$tableauDeCommande)) {
+                    $tableauDeCommande['quantiteCommander'] = $tableauDeCommande['quantiteCommander'] +  intval($quantite);
+                }else {
+                    $tableauDeCommande[] =["id"=>$leProduit->getId(),"quantiteCommander"=> intval($quantite),];
+                }
                 
+                // Récupérer la quantité du produit dans la session
+                $quantiteCommande = $session->get('qte' . $leProduit->getId(), 0);
+        
                 // Mettre à jour la quantité dans la session
                 $quantiteCommande += intval($quantite);
-                $session->set('qte_' . $leProduit->getId(), $quantiteCommande);
-                
-                 // Récupérer le montant total actuel depuis la session
+                $session->set('qte' . $leProduit->getId(), $quantiteCommande);
+        
+                // Récupérer le montant total actuel depuis la session
                 $montantTotal = $session->get('commande_montant', 0);
-
+        
                 // Calculer le nouveau montant
                 $nouveauMontant = $leProduit->getPrixDeVente() * intval($quantite);
+        
                 // Mettre à jour le montant total
                 $montantTotal += $nouveauMontant;
                 $session->set('commande_montant', $montantTotal);
+        
                 // Mettre à jour le montant de la requête
                 $montant = $montantTotal;
                 $session->set('montant', $montant);
-
-               
             }
-        }
         
+            
+        }
+        // dd($tableauDeCommande);
         return $this->render('panier/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
             'maListe' => $maListe,
@@ -111,4 +125,14 @@ class PanierController extends AbstractController
         $session->set('panier', $panier);
         return $this->redirectToRoute("app_produit_show",['id' => $id]);
     }
+    #[Route('/panier/delete', name: 'app_trash_panier')]
+    public function viderPanier(SessionInterface $session): Response
+    {
+        $session->remove('panier');
+        $session->remove('montant');
+        $session->remove('commande_montant');
+        return $this->redirectToRoute("app_home");
+    }
+
+    
 }

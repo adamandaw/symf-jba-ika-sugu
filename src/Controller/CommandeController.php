@@ -28,24 +28,27 @@ class CommandeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager,
     SessionInterface $session,ProduitRepository $produitRepository): Response
     {
-        if ($session->has('panier')) {
-            
+        $panier = $session->get('panier');
+        $qte = $session->get('qte');
+        $montantCommande = $session->get('montant');
+        if (!$session->has('telephone')) {
+            return $this->redirectToRoute("app_panier");
         }
+        $telephoneCommande = $session->get('telephone');
+        
         $commande = new Commande();
-        $form = $this->createForm(CommandeType::class, $commande);
-        $form->handleRequest($request);
+        $commande->setMontant($montantCommande)
+        ->setTelephone($telephoneCommande);
+        dd($commande,$panier,$qte);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($commande);
+            // crreer les details
+            
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('commande/new.html.twig', [
-            'commande' => $commande,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        
     }
 
     #[Route('/{id}', name: 'app_commande_show', methods: ['GET'])]
