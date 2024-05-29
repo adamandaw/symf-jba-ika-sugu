@@ -10,7 +10,7 @@
 {% block contentPage %}
 
  <div class="wrap-pub">
- <small>texte publicitaire et annonce ici</small>
+ <small id="pubmarketing"></small>
  </div>
  <div class="wrap-panier float-end">
     <a href="{{path("app_panier")}}">
@@ -65,9 +65,9 @@
               <div class="col-lg-12">
                   <div class="header-text">
                       <h6>Découvrez des produits alimentaires africains de qualité,</h6>
-                      <h2><em>importés et distribués</em> pour vous satisfaire.</h2>
+                      <h2><em>importés et distribués</em> pour vous satisfaire</h2>
                       <div class="white-button">
-                          <a href="#">Découvrir la boutique</a>
+                          <a href="{{path('app_boutique_page')}}">Découvrir la boutique</a>
                       </div>
                   </div>
               </div>
@@ -80,6 +80,7 @@
           <div class="row">
               <div class="col-lg-12">
               <div id="search-form">
+                      Rechercher par :
                   {{ form_start(form) }}
                       <div class="row">
                           {# <div class="col-lg-3">
@@ -90,8 +91,14 @@
                           </div> #}
                           <div class="col-lg-3">
                               <fieldset>
-                                  <label for="chooseCategory" class="form-label">Choisir la Category</label>
+                                  <label for="chooseCategory" class="form-label">Category</label>
                                  {{ form_widget(form.libelle) }}
+                              </fieldset>
+                          </div>
+                          <div class="col-lg-3">
+                              <fieldset>
+                                  <label for="chooseCategory" class="form-label">Provenance</label>
+                                 {{ form_widget(form.provenance) }}
                               </fieldset>
                           </div>
                           
@@ -167,11 +174,136 @@ faire découvrir les meilleurs ingrédients de la région, directement<br>chez v
      </div>
  <div id="espaceur"></div>
  <div id="espaceur"></div>
-  <h2 class="text-center">Category du mois</h2>
+
+    <section class="container py-5">
+        <div class="row text-center pt-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Categories du Mois</h1>
+             
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="{{asset('images/epices.jpg')}}" class="rounded-circle img-fluid border"></a>
+                <h5 class="text-center mt-3 mb-3">La Box Epice et <br> Sauce</h5>
+                <p class="text-center"><a class="btn btn-success" href="{{path("app_category_list_produit", {'id': 1} )}}">Voir</a></p>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="{{asset('images/cereale.jpg')}}" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Produits à base de Céréale</h2>
+                <p class="text-center"><a class="btn btn-success" href="{{path("app_category_list_produit", {'id': 8} )}}">Voir</a></p>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="{{asset('images/amusegueule.png')}}" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Les Amuses-Gueules</h2>
+                <p class="text-center"><a class="btn btn-success" href="{{path("app_category_list_produit", {'id': 3} )}}">Voir</a></p>
+            </div>
+        </div>
+    </section>
+    <!-- End Categories of The Month -->
+
+
+    <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Produit en vedette</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="{{ asset('images/tigaDaigai.jpg') }}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">800F /Kg</li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Pâte Arachide</a>
+                           
+                            <p class="text-muted">Vues (24)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="{{ asset('images/manioc.jpg') }}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">450F /Kg</li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Lot de Manioc</a>
+                           
+                            <p class="text-muted">Vues (48)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="{{ asset('images/avocat.jpg') }}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">650f /Kg</li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Avocat</a>
+                         
+                            <p class="text-muted">Vues (74)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <div id="espaceur"></div>
+     <div id="espaceur"></div>
 {% include "/shared/footer.html.twig" %}
 {% endblock %}
 
 {% block selfJs %}
   <script>
+  const small = document.querySelector('#pubmarketing');
+ 
+        // Liste des phrases marketing
+        let mesPhrases = ["Satisfait ou remboursé sous 30 jours", "Livraison sur tous vos achats !"];
+
+        // Indice de la phrase en cours
+        let phraseIndex = 0;
+
+        // Fonction qui affiche le texte
+        function afficherTexte() {
+            small.style.color="white"
+            small.textContent = mesPhrases[phraseIndex];
+            phraseIndex = (phraseIndex + 1) % mesPhrases.length; // Passer à la phrase suivante
+        }
+
+        // Appel de la fonction toutes les 3 secondes
+        setInterval(afficherTexte, 1000);
     </script>
 {% endblock %}

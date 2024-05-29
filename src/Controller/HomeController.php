@@ -27,9 +27,12 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // dd($form->get('libelle')->getData()->getLibelle());
+            // dd($form->get('provenance')->getData());
+            // if ($form->get('provenance')->getData() !== null) {
+            //     $provenance=$form->get('provenance')->getData();
+            // }
             switch ($form->get('libelle')->getData()->getLibelle()) {
                 case 'Epices':
-                    // dd($form->getData()['libelle']->getId());
                     $session->set('image_name',"spices-1191945_640.jpg");
                     $cat=$categoryRepository->findOneBy(['id' =>$form->getData()['libelle']->getId()]);
                     $produits = $produitRepository->findBy(['category' => $cat]);
@@ -38,8 +41,14 @@ class HomeController extends AbstractController
                         'categories' => $categoryRepository->findAll(),
                     ]);
                     break;
-                    case 'Les Amuse-Gueules':
-                        return $this->redirectToRoute("app_category_list_produit",['id' => $form->get('libelle')->getData()->getId()] );
+                    case 'Condiment':
+                        $session->set('image_name',"green-8667981_640.jpg");
+                            $cat=$categoryRepository->findOneBy(['id' =>$form->getData()['libelle']->getId()]);
+                            $produits = $produitRepository->findBy(['category' => $cat]);
+                            return $this->render('home/category-filtre/condiment/index.html.twig', [
+                                'produits' => $produits,
+                                'categories' => $categoryRepository->findAll(),
+                            ]);
                         break;
                         case 'Fruit':
                             $session->set('image_name',"tangerines-3105628_640.jpg");
@@ -60,8 +69,14 @@ class HomeController extends AbstractController
                                 ]);
 
                     break;
-                case 'Condiment':
-                        return $this->redirectToRoute("app_category_list_produit",['id' => $form->get('libelle')->getData()->getId()] );
+                case 'Les Amuse-Gueules':
+                    $session->set('image_name',"istockphoto-1175505781-170667a.jpg");
+                    $cat=$categoryRepository->findOneBy(['id' =>$form->getData()['libelle']->getId()]);
+                    $produits = $produitRepository->findBy(['category' => $cat]);
+                    return $this->render('home/category-filtre/amusesgueles/index.html.twig', [
+                        'produits' => $produits,
+                        'categories' => $categoryRepository->findAll(),
+                    ]);
                     break;
                 
                 default:
@@ -83,6 +98,16 @@ class HomeController extends AbstractController
     {
         return $this->render('home/presentation.html.twig', [
             'controller_name' => 'HomeController',
+        ]);
+    }
+    
+    #[Route('/la-boutique', name: 'app_boutique_page')]
+    public function boutiquePage(ProduitRepository $produitRepository,CategoryRepository $categoryRepository): Response
+    {
+
+        return $this->render('home/boutique/index.html.twig', [
+            'produits' => $produitRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
         ]);
     }
 }

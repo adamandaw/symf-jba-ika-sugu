@@ -23,12 +23,41 @@ class FilterProduitByCategoryType extends AbstractType
             'choice_label' => 'libelle',
             'choices' =>  $this->categoryRepository->findAll(),
             'required'=>false,
-                'constraints'=>[
-                    new NotBlank(['message'=>'le libelle est obligatoire.'])
-                ],
+                // 'constraints'=>[
+                //     new NotBlank(['message'=>'le libelle est obligatoire.'])
+                // ],
                 "attr"=>[
                     "placeholder"=>"Rechercher par category"
                 ]
+        ])
+        ->add('provenance', ChoiceType::class, [
+            'label' => false,
+            'choices' => [
+                'Afrique du Sud' => 'Afrique du Sud',
+                    'Algérie' => 'algeria',
+                    'Algérie' => 'Algérie',
+                    'Angola' => 'Angola',
+                    'Mali' => 'Mali',
+                    'Bénin' => 'Bénin',
+                    'Botswana' => 'Botswana',
+                    'Burkina Faso' => 'Burkina Faso',
+                    'Burundi' => 'Burundi',
+                    'Cameroun' => 'Cameroun',
+                    'Congo-Brazzaville' => 'Congo-Brazzaville',
+                    'Congo-Kinshasa' => 'Congo-Kinshasa',
+                    'Côte d\'Ivoire' => 'Côte d\'Ivoire',
+                    'Gabon' => 'Gabon',
+                    'Gambie' => 'Gambie',
+                    'Guinée' => 'Guinée',
+
+            ],
+            'expanded' => false, // Affiche les options sous forme de boutons radio
+            'multiple' => false, // Permet de ne sélectionner qu'une seule option
+            'constraints' => [
+                // new NotBlank([
+                //     'message' => 'Choix obligatoire.'
+                // ])
+            ]
         ])
         ->add('save',SubmitType::class,[
             "label"=>"Rechercher",
